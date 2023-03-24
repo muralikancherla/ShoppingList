@@ -1,13 +1,15 @@
 <div class="row">
-
-    <div class="col-xs-12">
-        <button class="btn btn-success">New Receipe</button>
-    </div>
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onNewRecipe()">New Receipe</button>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
-        <app-receipe-item *ngFor="let receipeElement of receipeElements" 
-        [recElement]="receipeElement"></app-receipe-item>
-    </div>
+  <div class="col-xs-12">
+    <app-receipe-item
+      *ngFor="let receipeElement of receipeElements; let i = index"
+      [recElement]="receipeElement"
+      [index]="i"
+    ></app-receipe-item>
+  </div>
 </div>
