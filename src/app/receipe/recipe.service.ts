@@ -8,25 +8,32 @@ import { Subject } from 'rxjs/Subject';
 export class RecipeService {
   recipesChanged = new Subject<Receipe[]>();
 
-  private receipeElements: Receipe[] = [
-    new Receipe(
-      'Blueberry Crisp',
-      'This is simply a test',
-      'https://bakesbybrownsugar.com/wp-content/uploads/2022/12/Prune-Bread-Pudding-3-1-720x960.jpg',
-      [new Ingredient('Blueberries', 50), new Ingredient('Brown Sugar', 1)]
-    ),
-    new Receipe(
-      'Spaghetti',
-      'This is simply a test',
-      'https://www.marionskitchen.com/wp-content/uploads/2022/12/Filipino-Spaghetti-02.jpg',
-      [new Ingredient('Spaghetti', 1), new Ingredient('Tomatoes', 2)]
-    ),
-  ];
+  private receipeElements: Receipe[] = [];
+
+  // private receipeElements: Receipe[] = [
+  //   new Receipe(
+  //     'Blueberry Crisp',
+  //     'This is simply a test',
+  //     'https://bakesbybrownsugar.com/wp-content/uploads/2022/12/Prune-Bread-Pudding-3-1-720x960.jpg',
+  //     [new Ingredient('Blueberries', 50), new Ingredient('Brown Sugar', 1)]
+  //   ),
+  //   new Receipe(
+  //     'Spaghetti',
+  //     'This is simply a test',
+  //     'https://www.marionskitchen.com/wp-content/uploads/2022/12/Filipino-Spaghetti-02.jpg',
+  //     [new Ingredient('Spaghetti', 1), new Ingredient('Tomatoes', 2)]
+  //   ),
+  // ];
 
   constructor(private shoppingService: ShoppingService) {}
 
   getRecipes() {
     return this.receipeElements.slice();
+  }
+
+  setRecipes(recipes: Receipe[]) {
+    this.receipeElements = recipes;
+    this.recipesChanged.next(this.receipeElements.slice());
   }
 
   getRecipe(id: number) {
