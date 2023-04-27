@@ -19,15 +19,17 @@ export class ShoppingEditComponent implements OnInit {
   constructor(private shoppingService: ShoppingService) {}
 
   ngOnInit() {
-    this.shoppingService.startedEditing.subscribe((index: number) => {
-      this.editedItemIndex = index;
-      this.editMode = true;
-      this.editedItem = this.shoppingService.getIngredient(index);
-      this.slForm.setValue({
-        name: this.editedItem.name,
-        amount: this.editedItem.amount,
-      });
-    });
+    const subscription = this.shoppingService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.shoppingService.getIngredient(index);
+        this.slForm.setValue({
+          name: this.editedItem.name,
+          amount: this.editedItem.amount,
+        });
+      }
+    );
   }
 
   onSubmit(form: NgForm) {
